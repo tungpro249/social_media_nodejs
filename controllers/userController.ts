@@ -23,11 +23,11 @@ const UserController = {
       if (user_name) return res.status(400).json({ message: USERNAME_IS_ALREADY_EXISTS });
 
       const user_phone = await Users.findOne({ phone: phone });
-      if (isValidPhone(user_phone)) return res.status(400).json({ message: PHONE_IS_NOT_VALID });
+      // if (isValidPhone(user_phone)) return res.status(400).json({ message: PHONE_IS_NOT_VALID });
       if (user_phone) return res.status(400).json({ message: PHONE_IS_ALREADY_EXISTS });
 
       const user_email = await Users.findOne({ email: email });
-      if (isValidEmail(user_email)) return res.status(400).json({ message: EMAIL_IS_NOT_VALID });
+      // if (isValidEmail(user_email)) return res.status(400).json({ message: EMAIL_IS_NOT_VALID });
       if (user_email) return res.status(400).json({ message: EMAIL_IS_ALREADY_EXISTS });
 
       const passwordHash = await bcrypt.hash(password, 12);

@@ -1,6 +1,6 @@
-const LOGIN_API_URL = "";
-const REGISTER_API_URL = "";
-const LOGOUT_API_URL = "";
+const LOGIN_API_URL = "/login";
+const REGISTER_API_URL = "/register";
+const LOGOUT_API_URL = "logout";
 
 export {
     LOGIN_API_URL,
