@@ -23,11 +23,9 @@ const UserController = {
       if (user_name) return res.status(400).json({ message: USERNAME_IS_ALREADY_EXISTS });
 
       const user_phone = await Users.findOne({ phone: phone });
-      // if (isValidPhone(user_phone)) return res.status(400).json({ message: PHONE_IS_NOT_VALID });
       if (user_phone) return res.status(400).json({ message: PHONE_IS_ALREADY_EXISTS });
 
       const user_email = await Users.findOne({ email: email });
-      // if (isValidEmail(user_email)) return res.status(400).json({ message: EMAIL_IS_NOT_VALID });
       if (user_email) return res.status(400).json({ message: EMAIL_IS_ALREADY_EXISTS });
 
       const passwordHash = await bcrypt.hash(password, 12);
@@ -77,13 +75,32 @@ const UserController = {
     }
   },
 
-  logout: (res, req) => {
+  logout: async (req, res) =>{
     try {
-      res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
-      return res.status(500).json({ message: LOGOUT_SUCCESS });
-    } catch (error: any) {
-      return res.status(500).json({ message: error.message });
+        res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
+        return res.json({ message: LOGOUT_SUCCESS })
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
     }
+},
+
+  refreshToken: (req, res) =>{
+    try {
+        const rf_token = req.cookies.refreshtoken;
+        if(!rf_token) return res.status(400).json({msg: "Please Login or Register"})
+
+        jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) =>{
+            if(err) return res.status(400).json({msg: "Please Login or Register"})
+
+            const accesstoken = createAccessToken({id: user.id})
+
+            res.json({accesstoken})
+        })
+
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+    
   },
 };
 

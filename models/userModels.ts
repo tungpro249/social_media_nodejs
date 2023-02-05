@@ -1,5 +1,5 @@
 // Require Mongoose
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // Define a schema
 const Schema = mongoose.Schema;
@@ -24,12 +24,14 @@ const UserSchema = new Schema({
         trim: true,
         maxLength: 10,
         unique: true,
+        match: /(84|0[3|5|7|8|9])+([0-9]{8})\b/
     },
     email: {
         type: String,
         trim: true,
         maxLength: 50,
         unique: true,
+        match: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     },
     gender: { type: String, default: "male" },
     password: String,
