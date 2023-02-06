@@ -2,6 +2,14 @@ import { REGEX_EMAIL, REGEX_PASSWORD, REGEX_PHONE, REGEX_USERNAME } from "../../
 
 const Joi = require('joi');
 
+/**
+ * validate register user
+ * username : 
+ * phone: vietnam phone number
+ * password: 
+ * email: 
+ */
+
 exports.registerUser = (req, res, next) => {
     const schema = Joi.object({
       username: Joi.string()

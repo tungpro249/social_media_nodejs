@@ -2,10 +2,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
   EMAIL_IS_ALREADY_EXISTS,
-  EMAIL_IS_NOT_VALID,
   PASSWORD_NOT_INCORRECT,
   PHONE_IS_ALREADY_EXISTS,
-  PHONE_IS_NOT_VALID,
   USERNAME_DOES_NOT_EXISTS,
   USERNAME_IS_ALREADY_EXISTS,
 } from "../constant/validMessage";
@@ -13,6 +11,13 @@ import { LOGIN_SUCCESS, LOGOUT_SUCCESS, REGISTER_SUCCESS } from "../constant/app
 const Users = require("../models/userModels");
 
 const UserController = {
+/**
+ * create a new user
+ * declare variables for the user
+ * check if the user already exists return false
+ * if the user not exists return true and save to the database
+ */
+
   register: async (req, res) => {
     try {
       const { fullname, username, phone, email, gender, password } = req.body;
@@ -43,6 +48,13 @@ const UserController = {
       return res.status(500).json({ message: error.message });
     }
   },
+
+  /**
+   * login user
+   * declare variables get user name and password
+   * check if user is already exists create new token return true and user information
+   * if user is not already exist return false
+   */
 
   login: async (req, res) => {
     try {
