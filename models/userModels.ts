@@ -17,6 +17,7 @@ const UserSchema = new Schema({
         trim: true,
         maxLength: 50,
         unique: true,
+        match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/
     },
     phone: {
         type: Number,
@@ -34,7 +35,11 @@ const UserSchema = new Schema({
         match: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     },
     gender: { type: String, default: "male" },
-    password: String,
+    password: {
+        type: String,
+        require: "true",
+        trim: true,
+    },
     follows: { type: Number, default: 0 },
     avatar: {
         type: String,

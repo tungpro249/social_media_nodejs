@@ -10,7 +10,6 @@ import {
   USERNAME_IS_ALREADY_EXISTS,
 } from "../constant/validMessage";
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS, REGISTER_SUCCESS } from "../constant/appConstant";
-import { isValidEmail, isValidPhone } from "../utils/isValid";
 const Users = require("../models/userModels");
 
 const UserController = {
